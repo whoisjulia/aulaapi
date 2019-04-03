@@ -1,6 +1,7 @@
 package br.com.viniciuspontes.aulaapi.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,16 @@ import br.com.viniciuspontes.aulaapi.domain.Produto;
 import br.com.viniciuspontes.aulaapi.services.ProdutoService;
 
 @RestController
-@RequestMapping("/produto")
+@RequestMapping("/produtos")
 public class ProdutoResource {
 	
 	@Autowired
 	private ProdutoService produtoService;
+	
+	@GetMapping()
+	public List<Produto> listar(){
+		return produtoService.listarTodas();
+	}
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Produto>find(@PathVariable Integer id) {
